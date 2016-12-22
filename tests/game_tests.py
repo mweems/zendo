@@ -24,11 +24,12 @@ def test_start_game_creates_rule():
 	assert_equal(gameRule, game.rule)
 
 
-def test_game_follows_rule():
+def test_game_follows_rule_with_all_same_color():
 	rule = 'must contain 3 blue'
+	initSize = 3
 	num = 5
 	while num > 0:
-		game = Game(3)
+		game = Game(initSize, rule)
 		for shape in game.shapes:
 			assert_equal('blue', shape.color)
 		num-=1

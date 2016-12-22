@@ -6,16 +6,23 @@ from enum import Enum
 class Game(object):
 
 	def __init__(self, size, rule=None):
-		self.shapes = self.create_shapes(size)
 		rule = rule
 		if not rule:
 			rule = self.choose_rule()
 		rp = RuleParser(rule)
 		self.rule = rp.parsed
+		self.shapes = self.create_shapes(size, self.rule)
 
-	def create_shapes(self, num):
+	def create_shapes(self, num, rule):
 		shapes = []
 		colors = ('red', 'blue', 'green', 'yellow')
+		mustLen = len(rule.get('must'))
+		notLen = len(rule.get('cannot'))
+		num -= (mustLen + notLen)
+		if(mustLen > 0):
+			while mustLen > 0:
+				shapes.append(Shape(color=rule.get('must')[0]))
+				mustLen-=1
 		rd = randint(0, num)
 		while num > 0:
 			shape = Shape(color=colors[rd])
