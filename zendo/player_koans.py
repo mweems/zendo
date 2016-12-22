@@ -7,4 +7,4 @@ class PlayerKoan(object):
 
 	def make_guess(self, *shapes):
 		for shape in shapes:
-			self.koan.append(Shape(color=shape.color))
+			self.koan.append(Shape(shape.color))

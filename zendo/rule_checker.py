@@ -1,7 +1,6 @@
 class RuleChecker(object):
 
 	def __init__(self, koan, rule):
-		print(rule)
 		self.passed = self.check_koan(koan, rule)
 
 	def check_koan(self, koan, rule):

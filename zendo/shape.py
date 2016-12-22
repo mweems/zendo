@@ -1,5 +1,4 @@
 class Shape(object):
 
-	def __init__(self, color, location=None):
+	def __init__(self, color):
 		self.color = color
-		self.location = location

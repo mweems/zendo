@@ -23,14 +23,14 @@ class Game(object):
 		num -= (mustLen)
 		if(mustLen > 0):
 			while mustLen > 0:
-				shapes.append(Shape(color=rule.get('must')[0]))
+				shapes.append(Shape(rule.get('must')[0]))
 				mustLen-=1
 		if(notLen > 0):
 			colors.remove(rule.get('cannot')[0])
 			num-=1
 		rd = randint(0, num)
 		while num > 0:
-			shape = Shape(color=colors[rd])
+			shape = Shape(colors[rd])
 			shapes.append(shape)
 			num-=1
 		return shapes
