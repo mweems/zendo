@@ -1,9 +1,9 @@
 from nose.tools import *
 from zendo.game import Game
 
-def test_start_game_creates_correct_number_of_starting_shapes():
+def test_start_game_creates_correct_number_of_starting_shapes_in_buddha_koan():
 	game = Game(3)
-	assert_equal(3, len(game.shapes))
+	assert_equal(3, len(game.buddhaKoan))
 
 def test_start_game_accepts_rule():
 	rule = 'must contain 1 red'
@@ -30,15 +30,24 @@ def test_game_follows_rule_with_all_same_color():
 	num = 5
 	while num > 0:
 		game = Game(initSize, rule)
-		for shape in game.shapes:
+		for shape in game.buddhaKoan:
 			assert_equal('blue', shape.color)
 		num-=1
 
-def test_game_follows_cannot_rule():
+def test_game_follows_cannot_simple_rule():
 	rule = 'cannot contain 1 blue'
 	initSize = 3
 	game = Game(initSize, rule)
 	colors = []
-	for shape in game.shapes:
+	for shape in game.buddhaKoan:
 		colors.append(shape.color)
 	assert('blue' not in colors)
+
+def test_game_creates_simple_non_buddha_koan():
+	rule = 'must contain 1 yellow'
+	initSize = 3
+	game = Game(initSize, rule)
+	colors = []
+	for shape in game.secularKoan:
+		colors.append(shape.color)
+	assert('yellow' not in colors)

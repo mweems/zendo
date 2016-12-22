@@ -11,9 +11,11 @@ class Game(object):
 			rule = self.choose_rule()
 		rp = RuleParser(rule)
 		self.rule = rp.parsed
-		self.shapes = self.create_shapes(size, self.rule)
+		self.antiRule = rp.antiParsed
+		self.buddhaKoan = self.create_koan(size, self.rule)
+		self.secularKoan = self.create_koan(size, self.antiRule)
 
-	def create_shapes(self, num, rule):
+	def create_koan(self, num, rule):
 		shapes = []
 		colors = ['red', 'blue', 'green', 'yellow']
 		mustLen = len(rule.get('must'))

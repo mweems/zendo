@@ -1,22 +1,24 @@
 class RuleParser(object):
 
 	def __init__(self, rule):
-		self.parsed = self.parse_rule(rule)
-
-	def parse_rule(self, rule):
 		rule = rule.split()
 		qty = int(rule[2])
-		pr = {
-			'must': [],
-			'cannot': []
-		}
-		if rule[0] == 'must':
-			pr['must'] = self.add_colors(color=rule[3], qty=qty)
-		else:
-			pr['cannot'] = self.add_colors(color=rule[3], qty=qty)
+		self.parsed = self.parse_rule(color=rule[3], qty=qty, type=rule[0])
+		self.antiParsed = self.parse_anti_rule(color=rule[3], qty=qty, type=rule[0])
 
+	def parse_rule(self, color, qty, type):
+		pr = {'must':[], 'cannot': []}
+		pr[type] = self.add_colors(color=color, qty=qty)
 		return pr
 
+	def parse_anti_rule(self, color, qty, type):
+		pr = {'must':[], 'cannot': []}
+		if(type == 'must'):
+			type = 'cannot'
+		else:
+			type = 'must'
+		pr[type] = self.add_colors(color=color, qty=qty)
+		return pr
 
 	def add_colors(self, color, qty):
 		colors = []
