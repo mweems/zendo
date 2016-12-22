@@ -1,14 +1,15 @@
 from zendo.shape import Shape
+from zendo.parser import RuleParser
 
 class Game(object):
 
 	def __init__(self, size, rule=None):
 		self.shapes = self.create_shapes(size)
-		self.rule = rule
+		rule = rule
 		if not rule:
-			self.rule = self.choose_rule()
-
-
+			rule = self.choose_rule()
+		rp = RuleParser(rule)
+		self.rule = rp.parsed
 
 	def create_shapes(self, num):
 		shapes = []
