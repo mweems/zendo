@@ -33,3 +33,12 @@ def test_game_follows_rule_with_all_same_color():
 		for shape in game.shapes:
 			assert_equal('blue', shape.color)
 		num-=1
+
+def test_game_follows_cannot_rule():
+	rule = 'cannot contain 1 blue'
+	initSize = 3
+	game = Game(initSize, rule)
+	colors = []
+	for shape in game.shapes:
+		colors.append(shape.color)
+	assert('blue' not in colors)
