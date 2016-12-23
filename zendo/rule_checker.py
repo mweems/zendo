@@ -5,14 +5,33 @@ class RuleChecker(object):
 
 	def check_koan(self, koan, rule):
 		must = rule['must']
-		qty = len(must)
+		must_qty = len(must)
 		cannot = rule['cannot']
-		num = 0
-		if qty > 0:
+		cant_qty = len(cannot)
+		m_num = 0
+		c_num = 0
+		must_true = False
+		cant_true = False
+		if must_qty > 0:
 			for k in koan:
 				if k.color == must[0]:
-					num += 1
-		if num == qty:
-			return True
+					m_num += 1
 		else:
-			return False
+			must_true = True
+		
+		if m_num == must_qty:
+			must_true = True
+		
+		if  cant_qty > 0:
+			for k in koan:
+				if k.color == cannot[0]:
+					c_num += 1
+		else:
+			cant_true = True
+
+		if c_num < cant_qty:
+			cant_true = True
+
+		if cant_true and must_true:
+			return True
+		return False

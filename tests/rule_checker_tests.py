@@ -19,3 +19,39 @@ def test_returns_false_when_passed_simple_must_and_failing_koan():
 	}
 	kc = RuleChecker(koan, rule)
 	assert_equal(False, kc.passed)
+
+def test_returns_true_when_multiple_color_koan():
+	koan = [Shape('blue'), Shape('blue'), Shape('yellow')]
+	rule = {
+		'must': ['blue', 'blue'],
+		'cannot': []
+	}
+	kc = RuleChecker(koan, rule)
+	assert_equal(True, kc.passed)
+
+def test_returns_false_when_less_than_qty():
+	koan = [Shape('blue'), Shape('blue'), Shape('yellow')]
+	rule = {
+		'must': ['blue', 'blue', 'blue'],
+		'cannot': []
+	}
+	kc = RuleChecker(koan, rule)
+	assert_equal(False, kc.passed)
+
+def test_returns_true_when_multiple_cannot():
+	koan = [Shape('blue'), Shape('red'), Shape('yellow')]
+	rule = {
+		'must': [],
+		'cannot': ['red', 'red']
+	}
+	kc = RuleChecker(koan, rule)
+	assert_equal(True, kc.passed)
+
+def test_returns_false_when_multiple_cannot():
+	koan = [Shape('red'), Shape('red'), Shape('yellow')]
+	rule = {
+		'must': [],
+		'cannot': ['red', 'red']
+	}
+	kc = RuleChecker(koan, rule)
+	assert_equal(False, kc.passed)
