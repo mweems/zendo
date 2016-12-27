@@ -3,7 +3,7 @@ from zendo.rule_checker import RuleChecker
 from zendo.shape import Shape
 
 def test_returns_true_when_pass_simple_must_and_passing_koan():
-	koan = [Shape('red'), Shape('blue'), Shape('yellow')]
+	koan = [Shape('red', 'M'), Shape('blue', 'M'), Shape('yellow', 'M')]
 	rule = {
 		'must': ['red'],
 		'cannot': []
@@ -12,7 +12,7 @@ def test_returns_true_when_pass_simple_must_and_passing_koan():
 	assert_equal(True, kc.passed)
 
 def test_returns_false_when_passed_simple_must_and_failing_koan():
-	koan = [Shape('blue'), Shape('green'), Shape('yellow')]
+	koan = [Shape('blue', 'M'), Shape('green', 'M'), Shape('yellow', 'M')]
 	rule = {
 		'must': ['red'],
 		'cannot': []
@@ -21,7 +21,7 @@ def test_returns_false_when_passed_simple_must_and_failing_koan():
 	assert_equal(False, kc.passed)
 
 def test_returns_true_when_multiple_color_koan():
-	koan = [Shape('blue'), Shape('blue'), Shape('yellow')]
+	koan = [Shape('blue', 'M'), Shape('blue', 'M'), Shape('yellow', 'M')]
 	rule = {
 		'must': ['blue', 'blue'],
 		'cannot': []
@@ -30,7 +30,7 @@ def test_returns_true_when_multiple_color_koan():
 	assert_equal(True, kc.passed)
 
 def test_returns_false_when_less_than_qty():
-	koan = [Shape('blue'), Shape('blue'), Shape('yellow')]
+	koan = [Shape('blue', 'M'), Shape('blue', 'M'), Shape('yellow', 'M')]
 	rule = {
 		'must': ['blue', 'blue', 'blue'],
 		'cannot': []
@@ -39,7 +39,7 @@ def test_returns_false_when_less_than_qty():
 	assert_equal(False, kc.passed)
 
 def test_returns_true_when_multiple_cannot():
-	koan = [Shape('blue'), Shape('red'), Shape('yellow')]
+	koan = [Shape('blue', 'M'), Shape('red', 'M'), Shape('yellow', 'M')]
 	rule = {
 		'must': [],
 		'cannot': ['red', 'red']
@@ -48,7 +48,7 @@ def test_returns_true_when_multiple_cannot():
 	assert_equal(True, kc.passed)
 
 def test_returns_false_when_multiple_cannot():
-	koan = [Shape('red'), Shape('red'), Shape('yellow')]
+	koan = [Shape('red', 'M'), Shape('red', 'M'), Shape('yellow', 'M')]
 	rule = {
 		'must': [],
 		'cannot': ['red', 'red']
