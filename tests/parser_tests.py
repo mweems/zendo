@@ -1,13 +1,15 @@
 from nose.tools import *
 from zendo.parser import RuleParser
 
+rp = RuleParser()
+
 def test_rule_parser_basic_must():
 	rule = 'must contain 1 red'
 	parsed = {
 		'must': ['red'],
 		'cannot': []
 	}
-	rp = RuleParser(rule)
+	rp.parse(rule)
 	assert_equal(parsed, rp.parsed)
 
 def test_rule_parser_basic_cannot():
@@ -16,7 +18,7 @@ def test_rule_parser_basic_cannot():
 		'must': [],
 		'cannot': ['red']
 	}
-	rp = RuleParser(rule)
+	rp.parse(rule)
 	assert_equal(parsed, rp.parsed)
 
 def test_rule_parser_creates_anti_rule():
@@ -25,5 +27,5 @@ def test_rule_parser_creates_anti_rule():
 		'must': [],
 		'cannot': ['red']
 	}
-	rp = RuleParser(rule)
+	rp.parse(rule)
 	assert_equal(antiParsed, rp.antiParsed)

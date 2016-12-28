@@ -3,13 +3,16 @@ from zendo.parser import RuleParser
 from random import randint
 from enum import Enum
 
+
 class Game(object):
 
-	def __init__(self, size, rule=None):
-		rule = rule
-		if not rule:
-			rule = self.choose_rule()
-		rp = RuleParser(rule)
+	def newGame(self, size, rule):
+		self.colors = ['red', 'yellow', 'green', 'blue']
+		self.sizes = ['small', 'medium', 'large']
+
+		rp = RuleParser()
+		rp.parse(rule)
+		
 		self.rule = rp.parsed
 		self.antiRule = rp.antiParsed
 		self.buddhaKoan = self.create_koan(size, self.rule)
@@ -17,23 +20,21 @@ class Game(object):
 
 	def create_koan(self, num, rule):
 		shapes = []
-		colors = ['red', 'blue', 'green', 'yellow']
+		must = rule.get('must')
+		cant = rule.get('cannot')
 		mustLen = len(rule.get('must'))
 		notLen = len(rule.get('cannot'))
 		num -= (mustLen)
 		if(mustLen > 0):
 			while mustLen > 0:
-				shapes.append(Shape(rule.get('must')[0], 'M'))
+				shapes.append(Shape(rule.get('must')[0], 'medium'))
 				mustLen-=1
 		if(notLen > 0):
-			colors.remove(rule.get('cannot')[0])
+			self.colors.remove(cant[0])
 			num-=1
 		rd = randint(0, num)
 		while num > 0:
-			shape = Shape(colors[rd], 'M')
+			shape = Shape(self.colors[rd], 'medium')
 			shapes.append(shape)
 			num-=1
 		return shapes
-
-	def choose_rule(self):
-		return 'must contain 1 blue'

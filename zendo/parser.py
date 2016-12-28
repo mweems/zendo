@@ -1,6 +1,6 @@
 class RuleParser(object):
 
-	def __init__(self, rule):
+	def parse(self, rule):
 		rule = rule.split()
 		qty = int(rule[2])
 		self.parsed = self.parse_rule(rule[3], qty, type=rule[0])
