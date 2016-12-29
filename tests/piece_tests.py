@@ -1,7 +1,9 @@
 from nose.tools import *
-from zendo.shape import Shape
+from zendo.piece import Piece
 
 def test_shape_setup():
-	shape = Shape('red', 'M')
-	assert_equal('red', shape.color)
-	assert_equal('M', shape.size)
+	piece = Piece()
+	piece.setColor('red')
+	assert_equal('red', piece.color)
+	piece.setSize('large')
+	assert_equal('large', piece.size)
