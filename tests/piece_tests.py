@@ -1,5 +1,5 @@
 from nose.tools import *
-from zendo.piece import Piece
+from piece import Piece
 
 def test_shape_setup():
 	piece = Piece()
