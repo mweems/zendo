@@ -3,7 +3,7 @@ from piece import Piece
 from koan import Koan
 
 
-def test_adding_shape_to_koan():
+def test_adding_piece_to_koan():
 	piece = Piece('red', 'large')
 	koan = Koan()
 	koan.addPiece(piece)
@@ -11,7 +11,7 @@ def test_adding_shape_to_koan():
 	koan.addPiece(piece)
 	assert_equal(2, len(koan.pieces))
 
-def test_adding_multiple_shapes_to_koan():
+def test_adding_multiple_pieces_to_koan():
 	p1 = Piece('red', 'large')
 	p2 = Piece('blue', 'medium')
 	p3 = Piece('green', 'small')
