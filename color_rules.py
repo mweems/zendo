@@ -4,18 +4,20 @@ from piece import Piece
 
 class SingleColorRule(Rule):
 
-	def __init__(self, ruleStr, color):
-		Rule.__init__(self, ruleStr)
+	def __init__(self, ruleStr, color, piece=None):
+		Rule.__init__(self, ruleStr, piece)
 		self.color = color
 
 	def getPiece(self):
-		return Piece(color=self.color)
+		self.piece.setColor(color=self.color)
+		return self.piece
 
 class SingleSizeRule(Rule):
 
-	def __init__(self, ruleStr, size):
-		Rule.__init__(self, ruleStr)
+	def __init__(self, ruleStr, size, piece=None):
+		Rule.__init__(self, ruleStr, piece)
 		self.size = size
 
 	def getPiece(self):
-		return Piece(size=self.size)
+		self.piece.setSize(size=self.size)
+		return self.piece

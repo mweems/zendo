@@ -12,6 +12,7 @@ class Game(object):
 
 	def __init__(self, type):
 		self.buddhaKoan = Koan()
+
 		rules = {
 			'color' : 'must contain 1 red',
 			'size' : 'must contain 1 large'

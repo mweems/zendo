@@ -12,6 +12,7 @@ class TestPiece:
 		assert_equal('red', piece1.color)
 		piece1.setSize('large')
 		assert_equal('large', piece1.size)
+		assert_equal(3, piece1.pips)
 	
 	def test_piece_accepts_rand(self):
 		piece = Piece(color='rand', size='rand')
