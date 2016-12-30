@@ -1,9 +1,18 @@
 from nose.tools import *
 from piece import Piece
 
-def test_shape_setup():
-	piece = Piece()
-	piece.setColor('red')
-	assert_equal('red', piece.color)
-	piece.setSize('large')
-	assert_equal('large', piece.size)
+class TestPiece:
+
+	def test_piece_setup(self):
+		piece = Piece(color='red', size='large')
+		assert_equal('red', piece.color)
+		assert_equal('large', piece.size)
+		piece1 = Piece()
+		piece1.setColor('red')
+		assert_equal('red', piece1.color)
+		piece1.setSize('large')
+		assert_equal('large', piece1.size)
+	
+	def test_piece_accepts_rand(self):
+		piece = Piece(color='rand', size='rand')
+		assert(piece.color is not None)

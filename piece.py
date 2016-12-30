@@ -1,10 +1,16 @@
+from random import randint
+
 class Piece(object):
-	colors = ['red', 'yellow', 'blue', 'green']
-	sizes = ['large', 'medium', 'small']
 
 	def __init__(self, color=None, size=None):
-		self.color = color
-		self.size = size
+		colorOps = ['red', 'yellow', 'blue', 'green']
+		sizeOps = ['large', 'medium', 'small']
+		if color == 'rand':
+			color = colorOps[randint(0,3)]
+		if size == 'rand':
+			size = sizeOps[randint(0,2)]
+		self.color = color if color in colorOps else None
+		self.size = size if size in sizeOps else None
 
 	def setColor(self, color):
 		self.color = color

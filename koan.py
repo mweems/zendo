@@ -1,5 +1,5 @@
 class Koan(object):
-
+	
 	def __init__(self, *args):
 		self.pieces = []
 		if args:
