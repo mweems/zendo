@@ -32,3 +32,13 @@ class TestGame:
 			if piece.size == 'large':
 				count +=1
 		assert(count > 0)
+
+	def test_game_follows_combo_rule(self):
+		# using built in simple color rules for testing
+		# rule is must contain 1 large red
+		game = Game('both')
+		count = 0
+		for piece in game.buddhaKoan.pieces:
+			if piece.size == 'large' and piece.color == 'red':
+				count +=1
+		assert(count > 0)
