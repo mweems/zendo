@@ -17,7 +17,6 @@ class Game(object):
 			'size' : 'must contain 1 large'
 		}
 
-
 		self.rule = rules[type]
 		if type == 'color':
 			self.createColorPiece()
@@ -34,7 +33,13 @@ class Game(object):
 		pass
 
 	def finishKoan(self):
-		currentLen = len(self.buddhaKoan.pieces)
+		pieces = self.buddhaKoan.pieces
+		for piece in pieces:
+			if piece.color == None:
+				piece.setColor('rand')
+			if piece.size == None:
+				piece.setSize('rand')
+		currentLen = len(pieces)
 		while currentLen < 3:
 			self.buddhaKoan.addPiece(Piece(color='rand', size='rand'))
 			currentLen +=1
