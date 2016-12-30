@@ -9,28 +9,32 @@ class Game(object):
 # create buddha koan
 # create secular koan
 # check player koan
-	rules = {
-		'color' : 'must contain 1 red',
-		'size' : 'must contain 1 large'
-	}
-
-	buddhaKoan = Koan()
 
 	def __init__(self, type):
+		self.buddhaKoan = Koan()
+		rules = {
+			'color' : 'must contain 1 red',
+			'size' : 'must contain 1 large'
+		}
+
+
 		self.rule = rules[type]
 		if type == 'color':
-			createColorShape()
+			self.createColorPiece()
 		if type == 'size':
-			createSizeShape()
-		finishKoan()
+			self.createSizePiece()
+		self.finishKoan()
 
-	def createColorShape(self):
+	def createColorPiece(self):
 		rule = self.rule.split()
-		colorRule = SingleColorRule(self.rule, rule.get(3))
-		buddhaKoan.addPiece(colorRule.getPiece())
+		colorRule = SingleColorRule(self.rule, rule[3])
+		self.buddhaKoan.addPiece(colorRule.getPiece())
+
+	def createSizePiece(self):
+		pass
 
 	def finishKoan(self):
-		currentLen = len(buddhaKoan)
+		currentLen = len(self.buddhaKoan.pieces)
 		while currentLen < 3:
-			buddhaKoan.append(Piece(color='rand', size='rand'))
+			self.buddhaKoan.addPiece(Piece(color='rand', size='rand'))
 			currentLen +=1

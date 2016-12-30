@@ -16,3 +16,9 @@ class TestPiece:
 	def test_piece_accepts_rand(self):
 		piece = Piece(color='rand', size='rand')
 		assert(piece.color is not None)
+		assert(piece.size is not None)
+		piece1 = Piece()
+		piece1.setSize('rand')
+		piece1.setColor('rand')
+		assert(piece1.color is not None)
+		assert(piece1.size is not None)
