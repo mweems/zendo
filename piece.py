@@ -21,3 +21,9 @@ class Piece(object):
 		self.size = size if size in self.sizeOps else None
 		if size:
 			self.pips = self.pipOps[size]
+
+	def removeColor(self, color):
+		colors = self.colorOps
+		if color in colors:
+			colors.remove(color)
+		self.color = colors[randint(0,2)]

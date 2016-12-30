@@ -23,3 +23,8 @@ class TestPiece:
 		piece1.setColor('rand')
 		assert(piece1.color is not None)
 		assert(piece1.size is not None)
+
+	def test_piece_accepts_remove(self):
+		piece = Piece()
+		piece.removeColor('red')
+		assert(piece.color in ['yellow', 'blue', 'green'])

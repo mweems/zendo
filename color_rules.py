@@ -21,3 +21,13 @@ class SingleSizeRule(Rule):
 	def getPiece(self):
 		self.piece.setSize(size=self.size)
 		return self.piece
+
+class CantColorRule(Rule):
+
+	def __init__(self, ruleStr, color, piece=None):
+		Rule.__init__(self, ruleStr, piece)
+		self.color = color
+
+	def getPiece(self):
+		self.piece.removeColor(color=self.color)
+		return self.piece

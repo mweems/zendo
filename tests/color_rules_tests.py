@@ -1,5 +1,5 @@
 from nose.tools import *
-from color_rules import SingleColorRule, SingleSizeRule
+from color_rules import SingleColorRule, SingleSizeRule, CantColorRule
 from piece import Piece
 
 class TestColorRule:
@@ -19,3 +19,11 @@ class TestSizeRules:
 		piece = Piece(size='large')
 		rulePiece = rule.getPiece()
 		assert_equal(piece.size, rulePiece.size)
+
+class TestRemoveRule:
+
+	def test_cant_color_rule(self):
+		ruleStr = 'cannot contain 1 red'
+		rule = CantColorRule(ruleStr, 'red')
+		rulePiece = rule.getPiece()
+		assert(rulePiece.color in ['yellow', 'green', 'blue'])
