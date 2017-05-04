@@ -1,4 +1,4 @@
-from koan import Koan
+from koan import Koan, SecularKoan
 from rule import Rule
 from random import randint
 
@@ -19,3 +19,5 @@ class Game(object):
 
 		self.buddhaKoan = Koan(attrs, size)
 		self.secularKoan = SecularKoan(attrs, size)
+
+

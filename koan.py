@@ -40,7 +40,7 @@ class Koan(object):
 				p.setRandColor()
 
 
-class ReverseKoan(object):
+class SecularKoan(object):
 
 	def __init__(self, attrs, size):
 		self.sizes = ['small', 'medium', 'large']
