@@ -27,5 +27,4 @@ class TestKoan:
 		for p in s.pieces:
 			print('game secular', p.color, p.size)
 
-
 		assert(True)

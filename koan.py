@@ -20,8 +20,9 @@ class Koan(object):
 
 		self.fillPieces()
 
-	def createPiece(self):
+	def createPiece(self):		
 		piece = Piece()
+
 		for s in self.sizes:
 			if self.sizes[s] > 0:
 				piece.setSize(s)
@@ -53,6 +54,7 @@ class SecularKoan(object):
 				self.sizes.remove(attr)
 			if attr in self.colors:
 				self.colors.remove(attr)
+
 		while size > 0:
 			p = Piece()
 			p.setRandSize(self.sizes)
@@ -64,10 +66,9 @@ class SecularKoan(object):
 
 class Piece(object):
 
-	sizes = ['small', 'medium', 'large']
-	colors = ['red', 'yellow', 'green', 'blue']
-
 	def __init__(self, size=None, color=None):
+		self.sizes = ['small', 'medium', 'large']
+		self.colors = ['red', 'yellow', 'green', 'blue']
 		self.setSize(size)
 		self.setColor(color)
 
@@ -80,12 +81,14 @@ class Piece(object):
 	def setRandSize(self, sizes=None):
 		if not sizes:
 			sizes = self.sizes
+
 		ind = randint(0, len(sizes) - 1)
 		self.setSize(sizes[ind])
 
 	def setRandColor(self, colors=None):
 		if not colors:
 			colors = self.colors
+
 		ind = randint(0, len(colors) - 1)
 		self.setColor(colors[ind])
 
