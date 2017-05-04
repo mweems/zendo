@@ -5,10 +5,10 @@ from random import randint
 class Game(object):
 
 	def __init__(self, diff, size):
-		self.diff = diff
-		self.size = size
+		self.diff = int(diff)
+		self.size = int(size)
 
-		rule = Rule(diff)
+		rule = Rule(self.diff)
 		rule = rule.rule.split()
 		
 		attrs = []
@@ -20,20 +20,19 @@ class Game(object):
 				attrs.append(attr)
 				count -= 1
 
-		self.buddhaKoan = Koan(attrs, size)
-		self.secularKoan = SecularKoan(attrs, size)
+		self.buddhaKoan = Koan(attrs, self.size)
+		self.secularKoan = SecularKoan(attrs, self.size)
 
 	def createUserKoan(self, attrs, size):
 		self.userKoan = Koan(attrs, size)
 
 	def check(self, buddhaKoan, userKoan):
 		for size in buddhaKoan.sizes:
-			if buddhaKoan.sizes[size] != userKoan.sizes[size]:
+			if buddhaKoan.sizes[size] > userKoan.sizes[size]:
 				return False
 		for color in buddhaKoan.colors:
-			if buddhaKoan.colors[color] != userKoan.colors[color]:
+			if buddhaKoan.colors[color] > userKoan.colors[color]:
 				return False
-
 		return True
 
 

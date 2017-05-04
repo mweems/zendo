@@ -82,14 +82,14 @@ class Piece(object):
 
 	def setRandSize(self, sizes=None):
 		if not sizes:
-			sizes = self.sizes
+			sizes = self.sizes.copy()
 
 		ind = randint(0, len(sizes) - 1)
 		self.setSize(sizes[ind])
 
 	def setRandColor(self, colors=None):
 		if not colors:
-			colors = self.colors
+			colors = self.colors.copy()
 
 		ind = randint(0, len(colors) - 1)
 		self.setColor(colors[ind])
