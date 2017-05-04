@@ -23,4 +23,20 @@ class Game(object):
 		self.buddhaKoan = Koan(attrs, size)
 		self.secularKoan = SecularKoan(attrs, size)
 
+	def createUserKoan(self, attrs, size):
+		self.userKoan = Koan(attrs, size)
+
+	def check(self, buddhaKoan, userKoan):
+		for size in buddhaKoan.sizes:
+			if buddhaKoan.sizes[size] != userKoan.sizes[size]:
+				return False
+		for color in buddhaKoan.colors:
+			if buddhaKoan.colors[color] != userKoan.colors[color]:
+				return False
+
+		return True
+
+
+
+
 

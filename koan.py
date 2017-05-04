@@ -14,6 +14,9 @@ class Koan(object):
 			elif attr in self.colors:
 				self.colors[attr] += 1
 
+		self.tmpSize = self.sizes.copy()
+		self.tmpColor = self.colors.copy()
+
 		while size > 0:
 			self.createPiece()
 			size -= 1
@@ -23,14 +26,14 @@ class Koan(object):
 	def createPiece(self):		
 		piece = Piece()
 
-		for s in self.sizes:
-			if self.sizes[s] > 0:
+		for s in self.tmpSize:
+			if self.tmpSize[s] > 0:
 				piece.setSize(s)
-				self.sizes[s] -= 1
-		for c in self.colors:
-			if self.colors[c] > 0:
+				self.tmpSize[s] -= 1
+		for c in self.tmpColor:
+			if self.tmpColor[c] > 0:
 				piece.setColor(c)
-				self.colors[c] -= 1
+				self.tmpColor[c] -= 1
 		self.pieces.append(piece)
 
 	def fillPieces(self):
@@ -39,7 +42,6 @@ class Koan(object):
 				p.setRandSize()
 			if not p.color:
 				p.setRandColor()
-
 
 class SecularKoan(object):
 
