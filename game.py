@@ -1,70 +1,58 @@
-from piece import Piece
 from koan import Koan
-from color_rules import SingleColorRule, SingleSizeRule, CantColorRule
+from random import randint
 
 class Game(object):
 
-# choose random rule
-# create rule object
-# create buddha koan
-# create secular koan
-# check player koan
+	sizes = ['small', 'medium', 'large']
+	colors = ['red', 'yellow', 'green', 'blue']
 
-	def __init__(self, type):
-		self.buddhaKoan = Koan()
+
+
+	def __init__(self, diff):
 
 		rules = {
-			'one' : 'must contain 1 red',
-			'two' : 'must contain 1 large',
-			'three': 'must contain 1 large red',
-			'four' : 'cannot contain 1 red'
+			1: 'must contain 1 red',
+			2: 'must contain 1 large',
 		}
 
-		self.rule = rules[type]
+		self.rule = rules[diff]
 		rule = self.rule.split()
-		if type == 'one':
-			self.buddhaKoan.addPiece(self.createColorPiece(rule[3]))
-			self.finishKoan()
-		if type == 'two':
-			self.buddhaKoan.addPiece(self.createSizePiece(rule[3]))
-			self.finishKoan()
-		if type == 'three':
-			piece = self.createColorPiece(rule[4])
-			self.buddhaKoan.addPiece(self.createSizePiece(rule[3], piece))
-			self.finishKoan()
-		if type == 'four':
-			self.buddhaKoan.addPiece(self.createCantPiece(rule[3]))
-			self.finishKoan(rule[3])
+		attrs = []
+		if diff == 1 or diff == 2:
+			attr = rule[3]
+			count = int(rule[2])
+			while count > 0:
+				attrs.append(attr)
+				count -= 1
 
-		
+		self.buddhaKoan = Koan(attrs)
+		self.secularKoan = self.reverseKoan(attrs, diff)
 
-	def createColorPiece(self, color,  piece=None):
-		colorRule = SingleColorRule(self.rule, color, piece)
-		return colorRule.getPiece()
 
-	def createSizePiece(self, size, piece=None):
-		sizeRule = SingleSizeRule(self.rule, size, piece)
-		return sizeRule.getPiece()
 
-	def createCantPiece(self, color, piece=None):
-		cantRule = CantColorRule(self.rule, color, piece)
-		return cantRule.getPiece()
+	def reverseKoan(self, attrs, diff):
+		tmpSize = self.sizes
+		tmpColor = self.colors
+		revAttrs = []
+		for attr in attrs:
+			if attr in self.sizes:
+				tmpSize.remove(attr)
+			elif attr in self.colors:
+				tmpColor.remove(attr)
 
-	def finishKoan(self, color=None):
-		currentLen = len(self.buddhaKoan.pieces)
-		if color:
-			while currentLen < 3:
-				piece = Piece()
-				piece.removeColor(color=color)
-				self.buddhaKoan.addPiece(piece)
-				currentLen +=1
-		else:
-			while currentLen < 3:
-				self.buddhaKoan.addPiece(Piece(color='rand', size='rand'))
-				currentLen +=1
-		for piece in self.buddhaKoan.pieces:
-			if piece.color == None:
-				piece.setColor('rand')
-			if piece.size == None:
-				piece.setSize('rand')
+		if len(tmpSize) == len(self.sizes):
+			revAttrs = self.addAttrs(tmpColor, diff)
+		elif len(tmpColor) == len(self.colors):
+			revAttrs = self.addAttrs(tmpSize, diff)
+
+		return Koan(revAttrs)
+
+	def addAttrs(self, attrs, diff):
+		revAttrs = []
+		while diff > 0:
+			ind = randint(0, len(attrs) - 1)
+			revAttrs.append(attrs[ind])
+			diff -= 1
+		return revAttrs
+
 
