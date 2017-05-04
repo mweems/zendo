@@ -6,7 +6,6 @@ size = input('Enter a number from 3 to 6: ')
 game = Game(diff, size)
 print(game.rule.rule)
 
-print(game.buddhaKoan.colors, game.buddhaKoan.sizes)
 print("")
 print('Buddha Koan')
 print("")
@@ -35,16 +34,9 @@ def ask(ans):
 	ask(ans)
 
 ask(ans)
-print(attrList, 'attrlist')
 game.createUserKoan(attrList, len(attrList)/2 )
-buddha = game.buddhaKoan
-user = game.userKoan
-print(" ")
-print(" buddha ", buddha.sizes, buddha.colors)
-print(" ")
-print(" user ", user.sizes, user.colors)
-print(" ")
-if game.check(buddha, user):
+
+if game.check(game.userKoan):
 	print('This Koan has the Buddha nature')
 else:
 	print('This Koan does not have the Buddha nature')

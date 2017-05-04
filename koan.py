@@ -5,6 +5,7 @@ class Koan(object):
 	def __init__(self, attrs, quantity):
 		self.sizes = {'small': 0, 'medium': 0, 'large': 0}
 		self.colors = {'red': 0, 'yellow': 0, 'green': 0, 'blue': 0}
+		self.attrs = attrs
 		self.pieces = []
 		needed = 0
 		if type(attrs[0]) == list:
@@ -107,14 +108,14 @@ class Piece(object):
 
 	def setRandSize(self, sizes=None):
 		if not sizes:
-			sizes = self.sizes.copy()
+			sizes = self.sizes
 
 		ind = randint(0, len(sizes) - 1)
 		self.setSize(sizes[ind])
 
 	def setRandColor(self, colors=None):
 		if not colors:
-			colors = self.colors.copy()
+			colors = self.colors
 
 		ind = randint(0, len(colors) - 1)
 		self.setColor(colors[ind])

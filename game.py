@@ -11,7 +11,7 @@ class Game(object):
 		self.rule = Rule(diff)
 		rule = self.rule.rule.split()
 		
-		attrs = []
+		self.attrs = []
 		
 		if diff == 1:
 			attr = rule[3]	
@@ -20,22 +20,19 @@ class Game(object):
 
 		count = int(rule[2])
 		while count > 0:
-			attrs.append(attr)
+			self.attrs.append(attr)
 			count -= 1
 
 
-		self.buddhaKoan = Koan(attrs, size)
-		self.secularKoan = SecularKoan(attrs, size)
+		self.buddhaKoan = Koan(self.attrs, size)
+		self.secularKoan = SecularKoan(self.attrs, size)
 
 	def createUserKoan(self, attrs, size):
 		self.userKoan = Koan(attrs, size)
 
-	def check(self, buddhaKoan, userKoan):
-		for size in buddhaKoan.sizes:
-			if buddhaKoan.sizes[size] > userKoan.sizes[size]:
-				return False
-		for color in buddhaKoan.colors:
-			if buddhaKoan.colors[color] > userKoan.colors[color]:
+	def check(self, userKoan):
+		for attr in self.attrs:
+			if attr not in userKoan.attrs:
 				return False
 		return True
 
