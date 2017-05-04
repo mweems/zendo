@@ -4,13 +4,14 @@ from random import randint
 
 class Game(object):
 
-	def __init__(self, diff, size):
+	def __init__(self, diff, size, rule=None):
 		diff = int(diff)
 		size = int(size)
-
-		self.rule = Rule(diff)
-		rule = self.rule.rule.split()
-		
+		if not rule:
+			self.rule = Rule(diff)
+			rule = self.rule.rule.split()
+		else:
+			self.rule = rule.split()
 		self.attrs = []
 		
 		if diff == 1:
