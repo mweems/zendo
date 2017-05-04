@@ -2,39 +2,49 @@ from random import randint
 
 class Koan(object):
 	
-	def __init__(self, attrs, size):
+	def __init__(self, attrs, quantity):
 		self.sizes = {'small': 0, 'medium': 0, 'large': 0}
 		self.colors = {'red': 0, 'yellow': 0, 'green': 0, 'blue': 0}
-		self.numPieces = size
 		self.pieces = []
-		
-		for attr in attrs:
-			if attr in self.sizes:
-				self.sizes[attr] += 1
-			elif attr in self.colors:
-				self.colors[attr] += 1
+		needed = 0
+		if type(attrs[0]) == list:
+			for attr in attrs:
+				size = attr[0]
+				color = attr[1]
+				if size in self.sizes:
+					self.sizes[size] += 1
+				if color in self.colors:
+					self.colors[color] += 1
+				self.pieces.append(Piece(size=size, color=color))
+			if quantity > len(self.pieces):
+				needed = quantity - len(self.pieces)
+			self.createPiece({}, {}, needed)
 
-		self.tmpSize = self.sizes.copy()
-		self.tmpColor = self.colors.copy()
+		else:
+			for attr in attrs:
+				if attr in self.sizes:
+					self.sizes[attr] += 1
+				elif attr in self.colors:
+					self.colors[attr] += 1
 
-		while size > 0:
-			self.createPiece()
-			size -= 1
+			self.createPiece(self.sizes.copy(), self.colors.copy(), quantity)
 
 		self.fillPieces()
 
-	def createPiece(self):		
-		piece = Piece()
+	def createPiece(self, sizes, colors, quantitiy):		
 
-		for s in self.tmpSize:
-			if self.tmpSize[s] > 0:
-				piece.setSize(s)
-				self.tmpSize[s] -= 1
-		for c in self.tmpColor:
-			if self.tmpColor[c] > 0:
-				piece.setColor(c)
-				self.tmpColor[c] -= 1
-		self.pieces.append(piece)
+		while quantitiy > 0:
+			piece = Piece()
+			for s in sizes:
+				if sizes[s] > 0:
+					piece.setSize(s)
+					sizes[s] -= 1
+			for c in colors:
+				if colors[c] > 0:
+					piece.setColor(c)
+					colors[c] -= 1
+			self.pieces.append(piece)
+			quantitiy -= 1
 
 	def fillPieces(self):
 		for p in self.pieces:
@@ -45,24 +55,39 @@ class Koan(object):
 
 class SecularKoan(object):
 
-	def __init__(self, attrs, size):
-		self.sizes = ['small', 'medium', 'large']
-		self.colors = ['red', 'yellow', 'green', 'blue']
+	def __init__(self, attrs, quantitiy):
+		sizes = ['small', 'medium', 'large']
+		colors = ['red', 'yellow', 'green', 'blue']
 		self.pieces = []
+		self.no = []
 
+		if type(attrs) == list:
+			for attr in attrs:
+				piece = Piece(size=attr[0], color=attr[1])
+				self.no.append(piece)
+		else:
 
-		for attr in attrs:
-			if attr in self.sizes:
-				self.sizes.remove(attr)
-			if attr in self.colors:
-				self.colors.remove(attr)
+			for attr in attrs:
+				if attr in sizes:
+					sizes.remove(attr)
+				if attr in colors:
+					colors.remove(attr)
+		self.setRandomPieces(sizes, colors, quantitiy)
 
-		while size > 0:
+	def setRandomPieces(self, sizes, colors, quantitiy):
+		while quantitiy > 0:
 			p = Piece()
-			p.setRandSize(self.sizes)
-			p.setRandColor(self.colors)
+			p.setRandSize(sizes)
+			p.setRandColor(colors)
 			self.pieces.append(p)
-			size -= 1
+			quantitiy -= 1
+		for p in self.no:
+			for piece in self.pieces:
+				if p.size == piece.size and p.color == piece.color:
+					self.pieces.remove(piece)
+					quantitiy += 1
+		if quantitiy > 0:
+			self.setRandomPieces(sizes, colors, quantitiy)
 
 	
 
