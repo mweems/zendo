@@ -1,18 +1,18 @@
 from nose.tools import *
-from koan import Koan
+from koan import Koan, ReverseKoan
 
 
 class TestKoan:
 
 	def test_create_basic_koan(self):
-		koan = Koan(['red'])
-		count = koan.colors['red']
-		assert_equal(count, 1)
+		koan = Koan(['red'], 3)
 
-		koan = Koan(['large'])
-		count = koan.sizes['large']
-		assert_equal(count, 1)
+		for p in koan.pieces:
+			print("koan", p.color, p.size)
 
-		koan = Koan(['red', 'red'])
-		count = koan.colors['red']
-		assert_equal(count, 2)
+		revKoan = ReverseKoan(['red'], 3)
+
+		for p in revKoan.pieces:
+			print("revKoan", p.color, p.size)
+
+		assert(True)
