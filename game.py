@@ -31,7 +31,7 @@ class Game(object):
 	def createUserKoan(self, attrs, size):
 		self.userKoan = Koan(attrs, size)
 
-	def check(self, userKoan):
+	def checkKoan(self, userKoan):
 		for attr in self.attrs:
 			if attr not in userKoan.attrs:
 				return False
