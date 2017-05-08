@@ -31,11 +31,21 @@ class Game(object):
 	def createUserKoan(self, attrs, size):
 		self.userKoan = Koan(attrs, size)
 
-	def checkKoan(self, userKoan):
-		for attr in self.attrs:
-			if attr not in userKoan.attrs[0]:
-				return False
+	def checkKoan(self, userKoan, gameKoan):
+		if len(userKoan.attrs) < len(gameKoan.attrs):
+			return False
+		count = 0
+		for attr in gameKoan.attrs:
+			for uAttr in userKoan.attrs:
+				if attr in uAttr:
+					userKoan.attrs.remove(uAttr)
+					count += 1
+					break
+
+		if count < len(gameKoan.attrs):
+			return False
 		return True
+
 
 	def checkRule(self, userRule):
 		self.rule = ('').join(self.rule.rule)

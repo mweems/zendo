@@ -9,8 +9,7 @@ class TestKoan:
 		koan = Koan(['red', 'red', 'red'], 3)
 		k2 = Koan(['red', 'red', 'red'], 3)
 		game = Game(1, 2)
-		print(game.buddhaKoan.sizes, game.buddhaKoan.colors, "buddha")
-		print(game.check(k2, koan))
-		print(game.check(game.buddhaKoan, koan))
+		print(koan.attrs)
+		print(game.buddhaKoan.attrs)
 
-		assert(True)
+		assert(False)

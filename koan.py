@@ -32,7 +32,7 @@ class Koan(object):
 
 		self.fillPieces()
 
-	def createPiece(self, sizes, colors, quantitiy):		
+	def createPiece(self, sizes, colors, quantitiy):	
 
 		while quantitiy > 0:
 			piece = Piece()
