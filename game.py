@@ -36,11 +36,18 @@ class Game(object):
 			return False
 		count = 0
 		for attr in gameKoan.attrs:
-			for uAttr in userKoan.attrs:
-				if attr in uAttr:
-					userKoan.attrs.remove(uAttr)
+			if type(attr[0]) == list:
+				if attr in userKoan.attrs:
+					userKoan.attrs.remove(attr)
 					count += 1
 					break
+			else:
+
+				for uAttr in userKoan.attrs:
+					if attr in uAttr:
+						userKoan.attrs.remove(uAttr)
+						count += 1
+						break
 
 		if count < len(gameKoan.attrs):
 			return False
