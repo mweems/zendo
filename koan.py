@@ -62,17 +62,16 @@ class SecularKoan(object):
 		self.pieces = []
 		self.no = []
 
-		if type(attrs) == list:
+		if type(attrs[0]) == list:
 			for attr in attrs:
-				piece = Piece(size=attr[0], color=attr[1])
-				self.no.append(piece)
+				self.no.append(Piece(size=attr[0], color=attr[1])) 
 		else:
-
 			for attr in attrs:
 				if attr in sizes:
 					sizes.remove(attr)
 				if attr in colors:
 					colors.remove(attr)
+
 		self.setRandomPieces(sizes, colors, quantitiy)
 
 	def setRandomPieces(self, sizes, colors, quantitiy):

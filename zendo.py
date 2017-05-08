@@ -24,8 +24,6 @@ for piece in game.secularKoan.pieces:
 print("")
 
 
-
-
 def addPiece(ans):
 	if ans == 'no':
 		return
@@ -42,7 +40,7 @@ def guessRule():
 	color = input('Please enter a color, red, yellow, blue, green, or none: ')
 	rule = ''
 	for attr in [size, color]:
-		if attr == 'none'
+		if attr == 'none':
 			attr = ''
 	if initial == "a":
 		rule = ("must contain %s %s %s" %(quant, size, color))
@@ -63,9 +61,6 @@ ans = 'yes'
 attrList = []
 addPiece(ans)
 
-#remove later
-print(attrList, 'attrlist')
-
 game.createUserKoan(attrList, len(attrList)/2 )
 
 
@@ -73,16 +68,13 @@ if game.checkKoan(game.userKoan):
 	print(" ")
 	print('This Koan has the Buddha nature')
 	print(" ")
-	
 else:
 	print(" ")
 	print('This Koan does not have the Buddha nature')
 	print(" ")
 
-
-
-
-
-
-
-
+guess = input('Would you like to guess the rule? y, n: ')
+if guess == 'y':
+	guessRule()
+else:
+	addPiece('yes')

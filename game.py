@@ -33,9 +33,19 @@ class Game(object):
 
 	def checkKoan(self, userKoan):
 		for attr in self.attrs:
-			if attr not in userKoan.attrs:
+			if attr not in userKoan.attrs[0]:
 				return False
 		return True
+
+	def checkRule(self, userRule):
+		self.rule = ('').join(self.rule.rule)
+		rule = userRule.split(' ')
+		rule.remove('none')
+		userRule = (' ').join(rule)
+		if self.rule == userRule:
+			return True
+
+		return False
 
 
 
