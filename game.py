@@ -68,7 +68,7 @@ class Game(object):
 
 		attrs = self.getAttrs(rule, self.diff)
 
-		self.exampleKoan = ExampleKoan(attrs, self.buddhaKoan)
+		self.exampleKoan = ExampleKoan(attrs, self.buddhaKoan.copy())
 		return False
 
 

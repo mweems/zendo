@@ -3,18 +3,11 @@ from koan import Koan, SecularKoan, ExampleKoan
 from game import Game
 
 
-class TestKoan:
+class TestGame:
 
-	def test_create_basic_koan(self):
-		koan = Koan(['red', 'red', 'red'], 3)
-		k2 = Koan(['red', 'red', 'red'], 3)
+	def test_simple_game(self):
+		rule = 'must contain 1 red'
+		game = Game(1, 3, rule)
+		userKoan = Koan(['small', 'red'], 1)
 
-		exKoan = ExampleKoan(['small'], koan)
-
-		print('example', exKoan)
-
-		game = Game(1, 2)
-		print(koan.attrs)
-		print(game.buddhaKoan.attrs)
-
-		assert(False)
+		assert(game.checkKoan(userKoan, game.buddhaKoan))
