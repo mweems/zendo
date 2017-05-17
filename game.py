@@ -38,16 +38,16 @@ class Game(object):
 
 	def checkKoan(self, userKoan, gameKoan):
 		if len(userKoan.attrs) < len(gameKoan.attrs):
+			print('here')
 			return False
 		count = 0
 		for attr in gameKoan.attrs:
-			if type(attr[0]) == list:
+			if type(attr) == list:
 				if attr in userKoan.attrs:
 					userKoan.attrs.remove(attr)
 					count += 1
 					break
 			else:
-
 				for uAttr in userKoan.attrs:
 					if attr in uAttr:
 						userKoan.attrs.remove(uAttr)
