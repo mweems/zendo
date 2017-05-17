@@ -36,3 +36,12 @@ class TestGame:
 
 		assert_equal(small, 0)
 		assert(red >= 1)
+
+		red = 0
+
+		for piece in game.buddhaKoan.pieces:
+			if piece.color == 'red':
+				red += 1
+
+		assert(red >= 1)
+		assert(game.checkRule('must contain 1 red'))
