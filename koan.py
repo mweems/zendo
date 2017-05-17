@@ -3,8 +3,8 @@ from random import randint
 class Koan(object):
 	
 	def __init__(self, attrs, quantity):
-		self.sizes = {'small': 0, 'medium': 0, 'large': 0}
-		self.colors = {'red': 0, 'yellow': 0, 'green': 0, 'blue': 0}
+		sizes = {'small': 0, 'medium': 0, 'large': 0}
+		colors = {'red': 0, 'yellow': 0, 'green': 0, 'blue': 0}
 		self.attrs = attrs
 		self.pieces = []
 		needed = 0
@@ -12,10 +12,10 @@ class Koan(object):
 			for attr in attrs:
 				size = attr[0]
 				color = attr[1]
-				if size in self.sizes:
-					self.sizes[size] += 1
-				if color in self.colors:
-					self.colors[color] += 1
+				if size in sizes:
+					sizes[size] += 1
+				if color in colors:
+					colors[color] += 1
 				self.pieces.append(Piece(size=size, color=color))
 			if quantity > len(self.pieces):
 				needed = quantity - len(self.pieces)
@@ -23,12 +23,12 @@ class Koan(object):
 
 		else:
 			for attr in attrs:
-				if attr in self.sizes:
-					self.sizes[attr] += 1
-				elif attr in self.colors:
-					self.colors[attr] += 1
+				if attr in sizes:
+					sizes[attr] += 1
+				elif attr in colors:
+					colors[attr] += 1
 
-			self.createPiece(self.sizes.copy(), self.colors.copy(), quantity)
+			self.createPiece(sizes.copy(), colors.copy(), quantity)
 
 		self.fillPieces()
 
@@ -53,6 +53,37 @@ class Koan(object):
 				p.setRandSize()
 			if not p.color:
 				p.setRandColor()
+
+class ExampleKoan(object):
+
+	def __init__(self, attrs, koan):
+		sizes = ['small', 'medium', 'large']
+		colors = ['red', 'yellow', 'green', 'blue']
+		
+		for attr in attrs:
+			if attr in sizes:
+				nSizes = sizes.copy()
+				nSizes.remove(attr)
+				self.removeSizeAttr(koan, nSizes)
+			if attr in colors:
+				nColors = colors.copy()
+				nColors.remove(attr)
+				self.removeColorAttr(koan, nColors)
+
+		self.attrs = koan.attrs
+		self.pieces = koan.pieces
+
+	def removeSizeAttr(self, koan, sizes):
+		for piece in koan.pieces:
+			if piece.size not in sizes:
+				piece.setRandSize(sizes)
+
+	def removeColorAttr(self, koan, colors):
+		for piece in koan.pieces:
+			if piece.color not in colors:
+				piece.setRandColor(colors)
+
+
 
 class SecularKoan(object):
 

@@ -9,12 +9,12 @@ class Zendo(object):
 		self.game = Game(diff, size)
 
 		#remove later
-		print(self.game.rule.rule)
+		print(self.game.rule)
 		
 		self.printKoans()
 		self.addPiece('yes', [])
 
-	def printKoans(self, userKoan=None):
+	def printKoans(self, userKoan=None, exampleKoan=None):
 		print("")
 		print('Buddha Koan')
 		print("")
@@ -35,6 +35,15 @@ class Zendo(object):
 			print('Your Koan')
 			print("")
 			for piece in userKoan.pieces:
+				print(piece.size, piece.color)
+			print("")
+		if exampleKoan:
+			print("")
+			print("###############")
+			print("")
+			print('Example Koan')
+			print("")
+			for piece in exampleKoan.pieces:
 				print(piece.size, piece.color)
 			print("")
 	
@@ -61,7 +70,8 @@ class Zendo(object):
 			print(" ")
 			print('that is incorrect')
 			print(" ")
-			addPiece('yes', [])
+			self.printKoans(userKoan=self.game.userKoan, exampleKoan=self.game.exampleKoan)
+			self.addPiece('yes', [])
 	
 	
 	

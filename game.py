@@ -1,32 +1,36 @@
-from koan import Koan, SecularKoan
+from koan import Koan, SecularKoan, ExampleKoan
 from rule import Rule
 from random import randint
 
 class Game(object):
 
 	def __init__(self, diff, size, rule=None):
-		diff = int(diff)
+		self.diff = int(diff)
 		size = int(size)
 		if not rule:
-			self.rule = Rule(diff)
-			rule = self.rule.rule.split()
+			self.rule = Rule(self.diff)
+			self.rule = self.rule.rule.split()
 		else:
 			self.rule = rule.split()
-		self.attrs = []
-		
+		attrs = self.getAttrs(self.rule, self.diff)
+		self.buddhaKoan = Koan(attrs, size)
+		self.secularKoan = SecularKoan(attrs, size)
+
+
+	def getAttrs(self, rule, diff):
+		attrs = []
+
 		if diff == 1:
-			attr = rule[3]	
+			attr = rule[3]
 		elif diff == 2:
 			attr = [rule[3], rule[4]]
-
 		count = int(rule[2])
 		while count > 0:
-			self.attrs.append(attr)
+			attrs.append(attr)
 			count -= 1
 
+		return attrs
 
-		self.buddhaKoan = Koan(self.attrs, size)
-		self.secularKoan = SecularKoan(self.attrs, size)
 
 	def createUserKoan(self, attrs, size):
 		self.userKoan = Koan(attrs, size)
@@ -55,13 +59,16 @@ class Game(object):
 
 
 	def checkRule(self, userRule):
-		self.rule = ('').join(self.rule.rule)
+		gameRule = ('').join(self.rule)
 		rule = userRule.split(' ')
 		rule.remove('none')
 		userRule = (' ').join(rule)
-		if self.rule == userRule:
+		if gameRule == userRule:
 			return True
 
+		attrs = self.getAttrs(rule, self.diff)
+
+		self.exampleKoan = ExampleKoan(attrs, self.buddhaKoan)
 		return False
 
 

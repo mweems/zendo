@@ -4,21 +4,27 @@ class Rule(object):
 
 	rules = {
 		1 : [
-			'must contain 2 red',
-			'must contain 2 large',
-			'must contain 2 blue',
-			'must contain 2 yellow',
-			'must contain 2 small',
-			'must contain 2 medium'
+			'must contain 1 red',
+			'must contain 1 large',
+			'must contain 1 blue',
+			'must contain 1 yellow',
+			'must contain 1 small',
+			'must contain 1 medium',
+			'must contain 1 large'
 			],
 		2 : [
 			'must contain 1 large red',
+			'must contain 1 medium red',
 			'must contain 1 small red',
 			'must contain 1 large blue',
-			'must contain 2 medium blue',
+			'must contain 1 medium blue',
+			'must contain 1 small blue',
+			'must contain 1 large yellow',
+			'must contain 1 medium yellow',
 			'must contain 1 small yellow',
-			'must contain 2 small green',
-			'must contain 1 medium red'
+			'must contain 1 large green',
+			'must contain 1 medium green',
+			'must contain 1 small green',
 			]
 	}
 
