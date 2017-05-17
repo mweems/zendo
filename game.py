@@ -1,6 +1,7 @@
 from koan import Koan, SecularKoan, ExampleKoan
 from rule import Rule
 from random import randint
+import copy
 
 class Game(object):
 
@@ -59,16 +60,17 @@ class Game(object):
 
 
 	def checkRule(self, userRule):
-		gameRule = ('').join(self.rule)
+		gameRule = (' ').join(self.rule)
 		rule = userRule.split(' ')
-		rule.remove('none')
+		if 'none' in rule:
+			rule.remove('none')
 		userRule = (' ').join(rule)
 		if gameRule == userRule:
 			return True
 
 		attrs = self.getAttrs(rule, self.diff)
 
-		self.exampleKoan = ExampleKoan(attrs, self.buddhaKoan.copy())
+		self.exampleKoan = ExampleKoan(attrs, copy.copy(self.buddhaKoan))
 		return False
 
 
