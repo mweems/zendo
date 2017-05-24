@@ -14,7 +14,7 @@ class Zendo(object):
 		self.printKoans()
 		self.addPiece('yes', [])
 
-	def printKoans(self, userKoan=None, exampleKoan=None):
+	def printKoans(self, userList=None, exampleList=None):
 		print("")
 		print('Buddha Koan')
 		print("")
@@ -28,24 +28,38 @@ class Zendo(object):
 		for piece in self.game.secularKoan.pieces:
 			print(piece.size, piece.color)
 		print("")
-		if userKoan:
+		if userList:
 			print("")
 			print("###############")
 			print("")
-			print('Your Koan')
+			print('Your Koan(s)')
 			print("")
-			for piece in userKoan.pieces:
-				print(piece.size, piece.color)
-			print("")
-		if exampleKoan:
+			for koan in userList:
+				print("############")
+				if(self.game.checkKoan(koan, self.game.buddhaKoan)):
+					print("This Koan has the Buddha Nature")
+				else:
+					print("This Koan does not have the Buddha Nature")
+				print("")
+				for piece in koan.pieces:
+					print(piece.size, piece.color)
+					print("")
+		if exampleList:
 			print("")
 			print("###############")
 			print("")
 			print('Example Koan')
 			print("")
-			for piece in exampleKoan.pieces:
-				print(piece.size, piece.color)
-			print("")
+			for koan in exampleList:
+				print("############")
+				if(self.game.checkKoan(koan, self.game.buddhaKoan)):
+					print("This Koan has the Buddha Nature")
+				else:
+					print("This Koan does not have the Buddha Nature")
+				print("")
+				for piece in koan.pieces:
+					print(piece.size, piece.color)
+					print("")
 	
 	def guessRule(self):
 		initial = input('Please enter "a" for "must contain" or "b" for "cannot contain": ')
@@ -70,7 +84,7 @@ class Zendo(object):
 			print(" ")
 			print('that is incorrect')
 			print(" ")
-			self.printKoans(userKoan=self.game.userKoan, exampleKoan=self.game.exampleKoan)
+			self.printKoans(userList=self.game.userList, exampleList=self.game.exampleList)
 			self.addPiece('yes', [])
 	
 	
@@ -95,7 +109,7 @@ class Zendo(object):
 			print('This Koan does not have the Buddha nature')
 			print(" ")
 		
-		self.printKoans(self.game.userKoan)
+		self.printKoans(self.game.userList)
 		guess = input('Would you like to guess the rule? y, n: ')
 		if guess == 'y':
 			self.guessRule()
