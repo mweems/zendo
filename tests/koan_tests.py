@@ -53,6 +53,13 @@ class TestGame:
 		
 		assert(game.checkKoan(userKoan, game.buddhaKoan))
 
+	def test_check_koan3(self):
+		rule = 'must contain 1 small red'
+		game = Game(2, 3, rule)
+		userKoan = Koan([['small', 'green'],['medium', 'red']], 2)
+
+		assert_false(game.checkKoan(userKoan, game.buddhaKoan))
+
 	def test_check_rule2(self):
 		rule = 'must contain 1 small red'
 		game = Game(2, 3, rule)
