@@ -40,6 +40,9 @@ class Game(object):
 
 	def checkKoan(self, userKoan, gameKoan):
 		if len(userKoan.attrs) < len(gameKoan.attrs):
+			print(userKoan.attrs)
+			print('---------')
+			print(gameKoan.attrs)
 			return False
 		count = 0
 		pieces = copy.copy(userKoan.pieces)
@@ -63,14 +66,10 @@ class Game(object):
 
 
 	def checkRule(self, userRule):
-		gameRule = (' ').join(self.rule)
 		rule = userRule.split(' ')
-		if 'none' in rule:
-			rule.remove('none')
-		userRule = (' ').join(rule)
-		if gameRule == userRule:
-			return True
-
+		for attr in self.rule:
+			if attr in rule:
+				return True
 		attrs = self.getAttrs(rule, self.diff)
 
 		self.exampleKoan = ExampleKoan(attrs, copy.copy(self.buddhaKoan))

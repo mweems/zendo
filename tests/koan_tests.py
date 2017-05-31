@@ -6,21 +6,19 @@ from game import Game
 class TestGame:
 
 	def test_check_koan(self):
-		rule = 'must contain 1 red'
-		game = Game(1, 3, rule)
+		game = Game(1, 3, ['red'])
 		userKoan = Koan(['small', 'red'], 1)
 
 		assert(game.checkKoan(userKoan, game.buddhaKoan))
 
 	def test_check_rule(self):
 		rule = 'must contain 1 red'
-		game = Game(1, 3, rule)
+		game = Game(1, 3, ['red'])
 
 		assert(game.checkRule(rule))
 
 	def test_example_koan(self):
-		rule = 'must contain 1 red'
-		game = Game(1, 3, rule)
+		game = Game(1, 3, ['red'])
 
 		assert_false(game.checkRule('must contain 1 small'))
 
@@ -48,7 +46,7 @@ class TestGame:
 
 	def test_check_koan2(self):
 		rule = 'must contain 1 small red'
-		game = Game(2, 3, rule)
+		game = Game(2, 3, ['small', 'red'])
 		userKoan = Koan(['small', 'red'], 1)
 		
 		assert(game.checkKoan(userKoan, game.buddhaKoan))
