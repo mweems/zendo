@@ -19,6 +19,21 @@ class Game(object):
 		self.exampleList = []
 
 
+	def getAttrs(self, rule, diff):
+		attrs = []
+
+		if diff == 1:
+			attr = rule[3]
+		elif diff == 2:
+			attr = [rule[3], rule[4]]
+		count = int(rule[2])
+		while count > 0:
+			attrs.append(attr)
+			count -= 1
+
+		return attrs
+
+
 	def createUserKoan(self, attrs, size):
 		self.userKoan = Koan(attrs, size)
 		self.userList.append(copy.copy(self.userKoan))

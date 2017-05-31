@@ -9,25 +9,20 @@ class Koan(object):
 		self.attrs = attrs
 		self.pieces = []
 		needed = 0
-		if type(attrs[0]) == list:
-			for attr in attrs:
-				size = attr[0]
-				color = attr[1]
-				if size in sizes:
-					sizes[size] += 1
-				if color in colors:
-					colors[color] += 1
+		for piece in attrs:
+			for attr in piece:
+				size = ''
+				color = ''
+				if attr in sizes:
+					sizes[attr] += 1
+					size = attr
+				if attr in colors:
+					colors[attr] += 1
+					color = attr
 				self.pieces.append(Piece(size=size, color=color))
 			if quantity > len(self.pieces):
 				needed = quantity - len(self.pieces)
 			self.createPiece({}, {}, needed)
-
-		else:
-			for attr in attrs:
-				if attr in sizes:
-					sizes[attr] += 1
-				elif attr in colors:
-					colors[attr] += 1
 
 			self.createPiece(copy.copy(sizes), copy.copy(colors), quantity)
 
@@ -67,7 +62,7 @@ class ExampleKoan(object):
 				nSizes.remove(attr)
 				self.removeSizeAttr(koan, nSizes)
 			if attr in colors:
-				nColors = colors.copy()
+				nColors = copy.copy(colors)
 				nColors.remove(attr)
 				self.removeColorAttr(koan, nColors)
 
