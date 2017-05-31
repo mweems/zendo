@@ -9,30 +9,14 @@ class Game(object):
 		self.diff = int(diff)
 		size = int(size)
 		if not rule:
-			self.rule = Rule(self.diff)
-			self.rule = self.rule.rule.split()
+			rule = Rule(self.diff)
+			self.rule = rule.rule
 		else:
-			self.rule = rule.split()
-		attrs = self.getAttrs(self.rule, self.diff)
-		self.buddhaKoan = Koan(attrs, size)
-		self.secularKoan = SecularKoan(attrs, size)
+			self.rule = rule
+		self.buddhaKoan = Koan(self.rule, size)
+		self.secularKoan = SecularKoan(self.rule, size)
 		self.userList = []
 		self.exampleList = []
-
-
-	def getAttrs(self, rule, diff):
-		attrs = []
-
-		if diff == 1:
-			attr = rule[3]
-		elif diff == 2:
-			attr = [rule[3], rule[4]]
-		count = int(rule[2])
-		while count > 0:
-			attrs.append(attr)
-			count -= 1
-
-		return attrs
 
 
 	def createUserKoan(self, attrs, size):

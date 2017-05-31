@@ -1,10 +1,11 @@
 from random import randint
+import copy
 
 class Koan(object):
 	
 	def __init__(self, attrs, quantity):
 		sizes = {'small': 0, 'medium': 0, 'large': 0}
-		colors = {'red': 0, 'yellow': 0, 'green': 0, 'blue': 0}
+		colors = {'red':0, 'blue':0, 'green':0, 'yellow':0}
 		self.attrs = attrs
 		self.pieces = []
 		needed = 0
@@ -28,7 +29,7 @@ class Koan(object):
 				elif attr in colors:
 					colors[attr] += 1
 
-			self.createPiece(sizes.copy(), colors.copy(), quantity)
+			self.createPiece(copy.copy(sizes), copy.copy(colors), quantity)
 
 		self.fillPieces()
 
@@ -62,7 +63,7 @@ class ExampleKoan(object):
 		
 		for attr in attrs:
 			if attr in sizes:
-				nSizes = sizes.copy()
+				nSizes = copy.copy(sizes)
 				nSizes.remove(attr)
 				self.removeSizeAttr(koan, nSizes)
 			if attr in colors:
